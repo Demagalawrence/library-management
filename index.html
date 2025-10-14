@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Library Management System</h1>
+  </div>
+
+  <form action="http://localhost:8080/addBook" method="post" class="book-form">
+    <label for="title">Book Title:</label><br>
+    <input id="title" type="text" name="title" placeholder="Enter title" required><br><br>
+
+    <label for="author">Author:</label><br>
+    <input id="author" type="text" name="author" placeholder="Enter author name" required><br><br>
+
+    <label for="year">Publication Year:</label><br>
+    <input id="year" type="number" name="year" placeholder="e.g. 2022" required><br><br>
+
+    <button type="submit">Add Book</button>
+  </form>
+
+  <p class="view-books-link">
+    To view all books, go to 
+    <a href="http://localhost:8080/books" target="_blank" rel="noopener noreferrer">View All Books</a>
+  </p>
+</body>
+</html>
