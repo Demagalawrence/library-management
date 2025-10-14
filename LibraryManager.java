@@ -34,6 +34,10 @@ public class LibraryManager {
                     searchBookByTitle();
                     break;
                 case 4:
+
+                    removeBook(); // ✅ new feature
+                    break;
+                case 5:
                     System.out.println("Thank you for using Library Management System!");
                     scanner.close();
                     return;
@@ -96,6 +100,20 @@ public class LibraryManager {
         
         if (!found) {
             System.out.println("No books found with title containing: " + searchTitle);
+        }
+    }
+
+    private void removeBook() {
+        System.out.println("\n=== Remove Book ===");
+        System.out.print("Enter title of the book to remove: ");
+        String title = scanner.nextLine().toLowerCase();
+
+        boolean removed = books.removeIf(book -> book.getTitle().toLowerCase().equals(title));
+
+        if (removed) {
+            System.out.println("Book removed successfully!");
+        } else {
+            System.out.println("No book found with that title.");
         }
     }
 
