@@ -11,6 +11,17 @@ This project uses **Java**, **HTTPServer**, and a simple HTML frontend.
 
 ---
 
+## How to Contribute
+
+We welcome contributions! To contribute:
+
+1. **Fork** this repository to your GitHub account.  
+2. **Clone** your fork locally:
+
+```bash
+git clone https://github.com/your-username/LibraryManagementServer.git
+
+
 ## Prerequisites
 
 - Java JDK 8 or higher installed  
