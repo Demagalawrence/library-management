@@ -2,20 +2,70 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
 .header {
-  background-color: #2b3a67;
+  background: linear-gradient(90deg, #2b3a67, #415a99);
   color: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 25px;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
+  animation: slideDown 1s ease-out;
 }
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
 
 .book-form {
   background-color: white;
   display: inline-block;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.book-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.book-form input:focus {
+  border-color: #2b3a67;
+  box-shadow: 0 0 6px rgba(43, 58, 103, 0.4);
+}
+/* Animation for header */
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .book-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
 }
