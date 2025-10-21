@@ -25,28 +25,7 @@ A modern, efficient library management system built to streamline library operat
 - **Fine Calculation & Management**
 - **Reports & Analytics**
 - **Inventory Management**
-- **System Configuration**
-
-## 🛠️ Technology Stack
-
-### Frontend
-- **React.js** - User Interface
-- **Tailwind CSS** - Styling
-- **React Router** - Navigation
-
-### Backend
-- **Node.js** - Runtime Environment
-- **Express.js** - Web Framework
-- **JWT** - Authentication
-
-### Database
-- **MongoDB** - Primary Database
-- **Mongoose** - ODM
-
-### Additional Tools
-- **Git** - Version Control
-- **Docker** - Containerization
-- **Jest** - Testing Framework
+- **System Configurate 
 
 ## 📦 Installation
 
