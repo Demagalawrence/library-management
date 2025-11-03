@@ -22,12 +22,6 @@ We welcome contributions! To contribute:
 git clone https://github.com/your-username/LibraryManagementServer.git
 
 
-## Prerequisites
-
-- Java JDK 8 or higher installed  
-- Internet browser (Chrome, Firefox, Edge, etc.)  
-
----
 
 
 ## How to Run
