@@ -15,11 +15,6 @@ A modern, efficient library management system built to streamline library operat
 - **Category & Genre Classification**
 - **Author & Publisher Database**
 
-### 🔄 Circulation Services
-- **Book Check-out & Return**
-- **Renewal System**
-- **Reservation Management**
-- **Overdue Tracking**
 
 
 
