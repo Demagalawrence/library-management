@@ -18,7 +18,7 @@ A modern, efficient library management system built to streamline library operat
 
 
 
-## 📦 Installation
+co authered 
 
 ### Step 1: Clone the Repository
 ```bash
