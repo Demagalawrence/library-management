@@ -19,6 +19,7 @@ A modern, efficient library management system built to streamline library operat
 
 
 co authered 
+by us
 
 ### Step 1: Clone the Repository
 ```bash
