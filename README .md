@@ -19,9 +19,4 @@ A modern, efficient library management system built to streamline library operat
 
 
 co authered 
-by us
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/your-username/library-management-system.git
-cd library-management-system
+it is done by us 
