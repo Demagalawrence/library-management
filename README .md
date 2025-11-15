@@ -12,11 +12,6 @@ A modern, efficient library management system built to streamline library operat
 ### 📖 Book Management
 - **Book Cataloging & Inventory**
 - **ISBN-based Book Search**
-- **Category & Genre Classification**
-- **Author & Publisher Database**
-
-
-
-
+  
 co authered 
 it is done by us 
