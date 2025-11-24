@@ -12,24 +12,63 @@
   <!-- Header Section -->
   <div class="header">
     <h1>Library Management System</h1>
+    <p class="subtitle">Manage books, members, and borrowing records</p>
   </div>
-<!-- Book Entry Form -->
-  <form action="http://localhost:8080/addBook" method="post" class="book-form">
-    <label for="title">Book Title:</label><br>
-    <input id="title" type="text" name="title" placeholder="Enter title" required><br><br>
 
-    <label for="author">Author:</label><br>
-    <input id="author" type="text" name="author" placeholder="Enter author name" required><br><br>
+  <div class="container">
+    <!-- Books Section -->
+    <section class="card">
+      <h2>Books</h2>
+      <form action="http://localhost:8080/addBook" method="post" class="form">
+        <label for="title">Book Title</label>
+        <input id="title" type="text" name="title" placeholder="Enter title" required>
 
-    <label for="year">Publication Year:</label><br>
-    <input id="year" type="number" name="year" placeholder="e.g. 2022" required><br><br>
+        <label for="author">Author</label>
+        <input id="author" type="text" name="author" placeholder="Enter author name" required>
 
-    <button type="submit">Add Book</button>
-  </form>
+        <label for="year">Publication Year</label>
+        <input id="year" type="number" name="year" placeholder="e.g. 2022" required>
 
-  <p class="view-books-link">
-    To view all books, go to 
-    <a href="http://localhost:8080/books" target="_blank" rel="noopener noreferrer">View All Books</a>
-  </p>
+        <button type="submit">Add Book</button>
+      </form>
+      <p class="card-link">
+        <a href="http://localhost:8080/books" target="_blank" rel="noopener noreferrer">View All Books</a>
+      </p>
+    </section>
+
+    <!-- Members Section -->
+    <section class="card">
+      <h2>Members</h2>
+      <form action="http://localhost:8080/addMember" method="post" class="form">
+        <label for="member-name">Member Name</label>
+        <input id="member-name" type="text" name="name" placeholder="Enter member name" required>
+
+        <label for="member-id">Member ID</label>
+        <input id="member-id" type="text" name="memberId" placeholder="e.g. M001" required>
+
+        <button type="submit">Add Member</button>
+      </form>
+      <p class="card-link">
+        <a href="http://localhost:8080/members" target="_blank" rel="noopener noreferrer">View All Members</a>
+      </p>
+    </section>
+
+    <!-- Borrowing Section -->
+    <section class="card">
+      <h2>Borrowing</h2>
+      <form action="http://localhost:8080/borrow" method="post" class="form">
+        <label for="borrow-member">Member</label>
+        <input id="borrow-member" type="text" name="member" placeholder="Member name or ID" required>
+
+        <label for="borrow-book">Book Title</label>
+        <input id="borrow-book" type="text" name="bookTitle" placeholder="Title of the book" required>
+
+        <button type="submit">Record Borrow</button>
+      </form>
+      <p class="card-link">
+        <a href="http://localhost:8080/loans" target="_blank" rel="noopener noreferrer">View Borrowing Records</a>
+      </p>
+    </section>
+  </div>
 </body>
 </html>
