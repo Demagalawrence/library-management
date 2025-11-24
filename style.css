@@ -1,7 +1,6 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  text-align: center;
   margin: 0;
   padding: 0;
   color: #333;
@@ -15,17 +14,67 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
   animation: slideDown 1s ease-out;
+  text-align: center;
 }
+
 .header h1 {
   margin: 0;
   font-size: 2rem;
   letter-spacing: 1px;
 }
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 24px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #2b3a67;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+label {
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 input {
   width: 250px;
   padding: 8px;
   margin: 5px 0;
 }
+
 button {
   background-color: #2b3a67;
   color: white;
@@ -33,6 +82,7 @@ button {
   padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
+  margin-top: 14px;
 }
 
 button:hover {
@@ -43,17 +93,15 @@ button:hover {
   margin-top: 20px;
 }
 
-
 .book-form {
   background-color: white;
-  display: inline-block;
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .book-form input {
-  width: 100%;
   padding: 10px;
   margin-top: 5px;
   border-radius: 8px;
@@ -67,6 +115,26 @@ button:hover {
   border-color: #2b3a67;
   box-shadow: 0 0 6px rgba(43, 58, 103, 0.4);
 }
+
+.card-link {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.card-link a {
+  color: #2b3a67;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card-link a:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: inherit;
+}
+
 /* Animation for header */
 @keyframes slideDown {
   from {
