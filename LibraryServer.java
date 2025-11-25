@@ -1,12 +1,13 @@
 import java.io.*;
 import java.net.*;
+import java.time.LocalDate;
 import java.util.*;
 import com.sun.net.httpserver.*;
 
 public class LibraryServer {
-    private static List<String> books = new ArrayList<>();
-    private static List<String> members = new ArrayList<>();
-    private static List<String> loans = new ArrayList<>();
+    private static List<Book> books = new ArrayList<>();
+    private static List<Member> members = new ArrayList<>();
+    private static List<Loan> loans = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
@@ -30,8 +31,14 @@ public class LibraryServer {
                 String year = params.getOrDefault("year", "");
 
                 if (!title.isEmpty() && !author.isEmpty() && !year.isEmpty()) {
-                    String book = String.format("%s by %s (%s)", title, author, year);
-                    books.add(book);
+                    try {
+                        int yearInt = Integer.parseInt(year);
+                        String id = UUID.randomUUID().toString();
+                        Book book = new Book(id, title, author, yearInt);
+                        books.add(book);
+                    } catch (NumberFormatException e) {
+                        // ignore invalid year for now
+                    }
                 }
             }
 
@@ -45,8 +52,8 @@ public class LibraryServer {
         // View all books
         server.createContext("/books", exchange -> {
             StringBuilder response = new StringBuilder("<html><body><h2>Books in Library:</h2><ul>");
-            for (String b : books) {
-                response.append("<li>").append(escapeHtml(b)).append("</li>");
+            for (Book b : books) {
+                response.append("<li>").append(escapeHtml(b.toString())).append("</li>");
             }
             response.append("</ul><a href='/'><- Back</a></body></html>");
 
@@ -65,7 +72,7 @@ public class LibraryServer {
                 String memberId = params.getOrDefault("memberId", "");
 
                 if (!name.isEmpty() && !memberId.isEmpty()) {
-                    String member = String.format("%s (ID: %s)", name, memberId);
+                    Member member = new Member(memberId, name);
                     members.add(member);
                 }
             }
@@ -80,8 +87,8 @@ public class LibraryServer {
         // View all members
         server.createContext("/members", exchange -> {
             StringBuilder response = new StringBuilder("<html><body><h2>Library Members:</h2><ul>");
-            for (String m : members) {
-                response.append("<li>").append(escapeHtml(m)).append("</li>");
+            for (Member m : members) {
+                response.append("<li>").append(escapeHtml(m.toString())).append("</li>");
             }
             response.append("</ul><a href='/'><- Back</a></body></html>");
 
@@ -100,7 +107,9 @@ public class LibraryServer {
                 String bookTitle = params.getOrDefault("bookTitle", "");
 
                 if (!member.isEmpty() && !bookTitle.isEmpty()) {
-                    String loan = String.format("%s borrowed '%s'", member, bookTitle);
+                    LocalDate today = LocalDate.now();
+                    LocalDate dueDate = today.plusDays(14);
+                    Loan loan = new Loan(member, bookTitle, today, dueDate);
                     loans.add(loan);
                 }
             }
@@ -112,13 +121,61 @@ public class LibraryServer {
             exchange.close();
         });
 
+        // Mark loan as returned
+        server.createContext("/return", exchange -> {
+            if ("POST".equals(exchange.getRequestMethod())) {
+                Map<String, String> params = parseForm(exchange.getRequestBody());
+                String indexParam = params.getOrDefault("loanIndex", "");
+                try {
+                    int idx = Integer.parseInt(indexParam);
+                    if (idx >= 0 && idx < loans.size()) {
+                        loans.get(idx).markReturned();
+                    }
+                } catch (NumberFormatException e) {
+                    // ignore invalid index
+                }
+            }
+
+            String response = "<html><body><h3>Loan marked as returned (if index was valid).</h3><a href='/loans'><- Back to loans</a></body></html>";
+            exchange.getResponseHeaders().add("Content-Type", "text/html");
+            exchange.sendResponseHeaders(200, response.length());
+            exchange.getResponseBody().write(response.getBytes());
+            exchange.close();
+        });
+
         // View all loans
         server.createContext("/loans", exchange -> {
             StringBuilder response = new StringBuilder("<html><body><h2>Borrowing Records:</h2><ul>");
-            for (String l : loans) {
-                response.append("<li>").append(escapeHtml(l)).append("</li>");
+            LocalDate today = LocalDate.now();
+            for (int i = 0; i < loans.size(); i++) {
+                Loan l = loans.get(i);
+                String status;
+                if (l.isReturned()) {
+                    status = "returned";
+                } else if (l.isOverdue(today)) {
+                    status = "OVERDUE";
+                } else {
+                    status = "active";
+                }
+                String item = String.format("[%d] %s borrowed '%s' on %s (due %s) - %s",
+                        i,
+                        l.getMember(),
+                        l.getBookTitle(),
+                        l.getBorrowDate(),
+                        l.getDueDate(),
+                        status);
+                response.append("<li>").append(escapeHtml(item)).append("</li>");
             }
-            response.append("</ul><a href='/'><- Back</a></body></html>");
+            response.append("</ul>");
+
+            response.append("<h3>Mark Loan as Returned</h3>");
+            response.append("<form method='post' action='/return'>");
+            response.append("<label for='loanIndex'>Loan index:</label>");
+            response.append("<input id='loanIndex' name='loanIndex' type='number' min='0'>");
+            response.append("<button type='submit'>Return</button>");
+            response.append("</form>");
+
+            response.append("<br><a href='/'><- Back</a></body></html>");
 
             exchange.getResponseHeaders().add("Content-Type", "text/html");
             byte[] respBytes = response.toString().getBytes();
