@@ -5,9 +5,7 @@ import java.util.*;
 import com.sun.net.httpserver.*;
 
 public class LibraryServer {
-    private static List<Book> books = new ArrayList<>();
-    private static List<Member> members = new ArrayList<>();
-    private static List<Loan> loans = new ArrayList<>();
+    private static final LibraryService service = new LibraryService();
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
@@ -30,16 +28,7 @@ public class LibraryServer {
                 String author = params.getOrDefault("author", "");
                 String year = params.getOrDefault("year", "");
 
-                if (!title.isEmpty() && !author.isEmpty() && !year.isEmpty()) {
-                    try {
-                        int yearInt = Integer.parseInt(year);
-                        String id = UUID.randomUUID().toString();
-                        Book book = new Book(id, title, author, yearInt);
-                        books.add(book);
-                    } catch (NumberFormatException e) {
-                        // ignore invalid year for now
-                    }
-                }
+                service.addBook(title, author, year);
             }
 
             String response = "<html><body><h3>Book added successfully!</h3><a href='/'><- Back</a></body></html>";
@@ -52,7 +41,7 @@ public class LibraryServer {
         // View all books
         server.createContext("/books", exchange -> {
             StringBuilder response = new StringBuilder("<html><body><h2>Books in Library:</h2><ul>");
-            for (Book b : books) {
+            for (Book b : service.getBooks()) {
                 response.append("<li>").append(escapeHtml(b.toString())).append("</li>");
             }
             response.append("</ul><a href='/'><- Back</a></body></html>");
@@ -71,10 +60,7 @@ public class LibraryServer {
                 String name = params.getOrDefault("name", "");
                 String memberId = params.getOrDefault("memberId", "");
 
-                if (!name.isEmpty() && !memberId.isEmpty()) {
-                    Member member = new Member(memberId, name);
-                    members.add(member);
-                }
+                service.addMember(name, memberId);
             }
 
             String response = "<html><body><h3>Member added successfully!</h3><a href='/'><- Back</a></body></html>";
@@ -87,7 +73,7 @@ public class LibraryServer {
         // View all members
         server.createContext("/members", exchange -> {
             StringBuilder response = new StringBuilder("<html><body><h2>Library Members:</h2><ul>");
-            for (Member m : members) {
+            for (Member m : service.getMembers()) {
                 response.append("<li>").append(escapeHtml(m.toString())).append("</li>");
             }
             response.append("</ul><a href='/'><- Back</a></body></html>");
@@ -106,12 +92,7 @@ public class LibraryServer {
                 String member = params.getOrDefault("member", "");
                 String bookTitle = params.getOrDefault("bookTitle", "");
 
-                if (!member.isEmpty() && !bookTitle.isEmpty()) {
-                    LocalDate today = LocalDate.now();
-                    LocalDate dueDate = today.plusDays(14);
-                    Loan loan = new Loan(member, bookTitle, today, dueDate);
-                    loans.add(loan);
-                }
+                service.borrow(member, bookTitle);
             }
 
             String response = "<html><body><h3>Borrow record added!</h3><a href='/'><- Back</a></body></html>";
@@ -128,9 +109,7 @@ public class LibraryServer {
                 String indexParam = params.getOrDefault("loanIndex", "");
                 try {
                     int idx = Integer.parseInt(indexParam);
-                    if (idx >= 0 && idx < loans.size()) {
-                        loans.get(idx).markReturned();
-                    }
+                    service.markLoanReturned(idx);
                 } catch (NumberFormatException e) {
                     // ignore invalid index
                 }
@@ -147,6 +126,7 @@ public class LibraryServer {
         server.createContext("/loans", exchange -> {
             StringBuilder response = new StringBuilder("<html><body><h2>Borrowing Records:</h2><ul>");
             LocalDate today = LocalDate.now();
+            List<Loan> loans = service.getLoans();
             for (int i = 0; i < loans.size(); i++) {
                 Loan l = loans.get(i);
                 String status;
