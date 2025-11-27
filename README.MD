@@ -127,4 +127,3 @@ database, or a richer UI), you can:
    git clone https://github.com/your-username/LibraryManagementServer.git
    ```
 
-3. Create a new branch, make your changes, and open a pull request.
