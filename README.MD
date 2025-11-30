@@ -31,7 +31,7 @@ for a lightweight HTTP server, and a single-page **HTML + CSS** frontend.
 
 ---
 
-## Project Structure
+## Project Structure.
 
 - `LibraryServer.java` – Java HTTP server, routes and in-memory storage
 - `index.html` – Main UI for managing books, members, and borrowing
@@ -65,7 +65,7 @@ and the built-in HTTP server.
 3. You should see in the console:
 
    ```
-   Server started at http://localhost:8080
+    Server started at http://localhost:8080
    ```
 
 4. **Open the web UI**:
