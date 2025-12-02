@@ -1,18 +1,36 @@
 package com.library.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "users")
 public class User extends BaseEntity {
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+    
+    @Column(unique = true, nullable = false)
+    private String username;
+    
+    @Column(nullable = false)
+    private String passwordHash;
+    
+    @Column(unique = true, nullable = false)
+    private String email;
+    
+    @Column(nullable = false)
+    private boolean active = true;
+    
+    private LocalDateTime lastLogin;
+    
+    private String resetToken;
+    private LocalDateTime resetTokenExpiry;
+    
     public enum Role {
         ADMIN, LIBRARIAN, MEMBER
     }
-
-    private String username;
-    private String passwordHash;
-    private String email;
-    private Role role;
-    private boolean active;
-    private LocalDateTime lastLogin;
 
     // Getters and Setters
     public String getUsername() {
