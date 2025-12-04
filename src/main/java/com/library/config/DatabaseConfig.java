@@ -84,7 +84,7 @@ public class DatabaseConfig {
         }
 
         try (Connection conn = getConnection()) {
-            // This will drop all objects in the schema
+            // This will drop all objects in the schema db
             Flyway flyway = Flyway.configure()
                     .dataSource(DB_URL, DB_USER, DB_PASSWORD)
                     .load();
