@@ -152,7 +152,7 @@ public class BookDTO {
         this.updatedAt = updatedAt;
     }
 
-    // Helper method to convert entity to DTO
+    // Helper method to convert entity to THE DTO
     public static BookDTO fromEntity(com.library.model.Book book) {
         BookDTO dto = new BookDTO();
         dto.setId(book.getId());

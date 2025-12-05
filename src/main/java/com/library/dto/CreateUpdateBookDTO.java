@@ -32,7 +32,7 @@ public class CreateUpdateBookDTO {
     private Set<Long> categoryIds = new HashSet<>();
     private Long publisherId;
 
-    // Getters and Setters
+    // Getters and Setters METHODS
     public String getIsbn() {
         return isbn;
     }
