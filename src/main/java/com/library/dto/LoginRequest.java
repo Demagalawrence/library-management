@@ -9,7 +9,7 @@ public class LoginRequest {
     @NotBlank
     private String password;
 
-    // Getters and Setters
+    // Getters and Setters methods
     public String getUsername() {
         return username;
     }

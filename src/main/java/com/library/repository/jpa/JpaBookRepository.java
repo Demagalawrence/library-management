@@ -74,7 +74,7 @@ public class JpaBookRepository implements BookRepository {
             book.getAuthors().forEach(author -> author.getBooks().remove(book));
             book.getCategories().forEach(category -> category.getBooks().remove(book));
             
-            // Clear collections to avoid constraint violations
+            // Clear collections to avoid constraint violation
             book.getAuthors().clear();
             book.getCategories().clear();
             
