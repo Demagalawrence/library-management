@@ -8,7 +8,7 @@
     <persistence-unit name="libraryPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
-        <!-- Entity classes -->
+        <!-- Entity class -->
         <class>com.library.model.Book</class>
         <class>com.library.model.Author</class>
         <class>com.library.model.Publisher</class>
