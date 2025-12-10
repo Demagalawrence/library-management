@@ -35,13 +35,13 @@ public class DatabaseConfig {
         }
 
         try {
-            // Initialize Flyway
+            // Initialize Flyways
             FluentConfiguration config = Flyway.configure()
                     .dataSource(DB_URL, DB_USER, DB_PASSWORD)
                     .locations("classpath:db/migration")
                     .baselineOnMigrate(true);
 
-            // Run migrations
+            // Run migration
             Flyway flyway = config.load();
             flyway.migrate();
 
