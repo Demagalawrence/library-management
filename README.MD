@@ -117,8 +117,7 @@ Possible improvements:
 
 ## Contributing
 
-If you want to extend this project (for example by adding persistence, a
-database, or a richer UI), you can:
+
 
 1. **Fork** the repository.  
 2. **Clone** your fork locally:
