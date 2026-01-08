@@ -19,7 +19,7 @@ import java.util.Set;
 public class Book extends BaseEntity {
     @Column(name = "isbn", nullable = false, unique = true, length = 20)
     private String isbn;
-    @Column(name = "title", nullable = false, length = 255)
+    @Column(name = "title", nullable = false, length = 254)
     private String title;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
