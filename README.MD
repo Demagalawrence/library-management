@@ -4,7 +4,7 @@ A simple **Java-based Library Management Server** that allows you to manage
 books, members, and borrowing records through a web browser.
 
 The project uses **plain Java**, the built-in `com.sun.net.httpserver.HttpServer`
-for a lightweight HTTP server, and a single-page **HTML + CSS** frontend.
+for a lightweight HTTP server
 
 ---
 
@@ -22,22 +22,13 @@ for a lightweight HTTP server, and a single-page **HTML + CSS** frontend.
   - Record when a member borrows a book (member + book title)  
   - View all borrowing records
 
-- **Simple Web UI**  
-  - One page (`index.html`) with three sections: **Books**, **Members**, and **Borrowing**  
-  - Links to separate pages that list books, members, and borrowing records
 
 > Note: All data is stored **in memory only**. When the server restarts,
 > books, members, and loans are cleared.
 
 ---
 
-## Project Structure.
 
-- `LibraryServer.java` – Java HTTP server, routes and in-memory storage
-- `index.html` – Main UI for managing books, members, and borrowing
-- `style.css` – Styling for the main page and cards
-
----
 
 ## Prerequisites
 
