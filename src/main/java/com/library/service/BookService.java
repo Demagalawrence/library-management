@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface BookService {
     List<BookDTO> findAll();
+
     Page<BookDTO> findAll(Pageable pageable);
     BookDTO findById(Long id);
 
