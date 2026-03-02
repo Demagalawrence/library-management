@@ -11,6 +11,7 @@ public interface BookService {
     List<BookDTO> findAll();
     Page<BookDTO> findAll(Pageable pageable);
     BookDTO findById(Long id);
+
     BookDTO findByIsbn(String isbn);
     List<BookDTO> findByTitleContaining(String title);
     List<BookDTO> findByAuthorName(String authorName);
