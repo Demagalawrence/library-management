@@ -6,7 +6,6 @@ books, members, and borrowing records through a web browser.
 The project uses **plain Java**, the built-in `com.sun.net.httpserver.HttpServer`
 for a lightweight HTTP server
 
----
 
 ## Features
 
